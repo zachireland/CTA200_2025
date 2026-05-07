@@ -1,0 +1,147 @@
+    1  /cita/local/bin/passwd
+    2  ssh -L 1234:localhost:1234 cosmo6
+    3  module load python/3.10.2
+    4  jupyter notebooks
+    5  module load python/3.10.2
+    6  cd. /CTA200H
+    7  module load python/3.10.2
+    8  jupyter notebook --no-browser --port=8889
+    9  ls
+   10  git clone git@github.com:CITA/CTA200H.git
+   11  ssh -L 8889:localhost:8889 zireland@cosmo6
+   12  git clone git@github.com:CITA/CTA200H.git
+   13  module load python/3.10.2
+   14  jupyter notebook --no-browser --port=8889
+   15  cd ~
+   16  git clone https://github.com/CITA/CTA200H.git
+   17  module load python/3.10.2
+   18  jupyter notebook --no-browser --port=8889
+   19  ssh -L 8889:localhost:8889 zireland@cosmo6
+   20  cd ~
+   21  git clone https://github.com/CITA/CTA200H.git
+   22  module load python/3.10.2
+   23  jupyter notebook --no-browser --port=8889
+   24  ssh -L 8789:localhost:8789 zireland@cosmo6
+   25  cd ~
+   26  git clone https://github.com/CITA/CTA200H.git
+   27   module load python/3.10.2
+   28  jupyter notebook --no-browser --port=8789
+   29  ssh -L 1828:localhost:1828 zireland@cosmo6
+   30  module load python/3.10.2
+   31  jupyter notebook --no-browser --port=1828
+   32  module load python/3.10.2
+   33  jupyter notebook --no-browser --port=1828
+   34  cd /fs/lustre/scratch/zireland
+   35  mkdir CTA200_2025
+   36  cd CTA200_2025
+   37  mkdir assignment_1
+   38  vi README.md
+   39  cd /fs/lustre/scratch/zireland
+   40  ssh cosmo6
+   41  ssh -L 1812:localhost:1812 cosmo6
+   42  ssh -L 1832:localhost:1832 cosmo6
+   43  cd /fs/lustre/scratch/$USER
+   44  cd /fs/lustre/scratch/zireland
+   45  ssh cosmos6
+   46  ssh -L 1023:localhost:1023 cosmo6
+   47  ssh -L 1803:localhost:1803 cosmo6
+   48  ssh -L 1812:localhost:1812 cosmo6
+   49  module load python/3.10.2
+   50  jupyter notebook --port=1812 --no-browser
+   51  ssh cosmo6
+   52  echo $USER
+   53  timeout 5s ls -ld /fs
+   54  timeout 5s ls -ld /fs/lustre
+   55  timeout 5s ls -ld /fs/lustre/scratch
+   56  timeout 5s ls -ld /fs/lustre/scratch/$USER
+   57  echo $?
+   58  ssh -L 1863:localhost:1863 cosmo6
+   59  ssh -L 1812:localhost:1812 cosmo6
+   60  module load python/3.10.2
+   61  jupyter notebook --port=1812 --no-browser
+   62  ssh -L 1894:localhost:1894 cosmo6
+   63  module load python/3.10.2
+   64  jupyter notebook --port=1894 --no-browser
+   65  ssh -L 1929:localhost:1929 cosmo6
+   66  module load python/3.10.2
+   67  jupyter notebook --port=xxxx --no-browser
+   68  jupyter notebook --port=1929 --no-browser
+   69  cd /fs/lustre/scratch/zireland
+   70  ssh -L 1929:localhost:1929 cosmo6
+   71  cd /fs/lustre/scratch/zireland
+   72  echo $USER
+   73  ls /fs/lustre/scratch
+   74  ssh -L 1929:localhost:1929 cosmo6
+   75  echo $SCRATCH
+   76  pwd
+   77  readlink -f CTA200_2025
+   78  pwd
+   79  readlink -f CTA200_2025
+   80  cd /fs/lustre/scratch/zireland
+   81  cd /fs/lustre/scratch/zireland
+   82  cd /fs/lustre/scratch/zireland
+   83  cd /fs/lustre/scratch/zireland
+   84  cd /fs/lustre/scratch/zireland
+   85  cd /fs/lustre/scratch/zireland
+   86  ssh -L 1929:localhost:1929 cosmo6
+   87  ssh -L 1929:localhost:1929 cosmo6
+   88  module load python/3.10.2
+   89  jupyter notebook --port=1929 --no-browser
+   90  ssh -L 1927:localhost:1927 cosmo4
+   91  cd /fs/lustre/scratch/zireland
+   92  echo $USER
+   93  cd /fs/lustre/scratch/zireland
+   94  pwd
+   95  ls
+   96  mkdir -p CTA200_2026/assignment_1
+   97  cd CTA200_2025/assignment_1
+   98  cd CTA200_2026/assignment_1
+   99  pwd
+  100  vi README.md
+  101  ssh -L 1927:localhost:1927 cosmo4
+  102  cd /fs/lustre/scratch/zireland
+  103  pwd
+  104  cd CTA200_2026/assignment_1
+  105  pwd
+  106  vi README.md
+  107  ssh -L 1927:localhost:1927 cosmo4
+  108  cd /fs/lustre/scratch/zireland
+  109  pwd
+  110  cd CTA200_2026/assignment_1
+  111  pwd
+  112  vi README.md
+  113  ls
+  114  cd /fs/lustre/scratch/zireland
+  115  pwd
+  116  cd CTA200_2025/assignment_1
+  117  pwd
+  118  cat README.md
+  119  ls -la
+  120  ls
+  121  module avail gcc
+  122  module load gcc/11.2.0
+  123  gcc --version
+  124  ls
+  125  gcc Hello_world_Ireland.c -o Hello_world.x
+  126  ls -la
+  127  ./Hello_world.x
+  128  python Hello_world_Ireland.py
+  129  python3 Hello_world_Ireland.py
+  130  vi Hello_world_Ireland.c
+  131  cat Hello_world_Ireland.c
+  132  vi Hello_world_Ireland.py
+  133  cat Hello_world_Ireland.py
+  134  gcc Hello_world_Ireland.c -o Hello_world.x
+  135  ./Hello_world.x
+  136  python3 Hello_world_Ireland.py
+  137  pwd
+  138  ls -la
+  139  pwd
+  140  ./Hello_world.x > output_c.txt
+  141  python3 Hello_world_Ireland.py > output_python.txt
+  142  ls -la
+  143  cat output_c.txt
+  144  cat output_python.txt
+  145  ls -la
+  146  pwd
+  147  history > history.txt
