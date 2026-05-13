@@ -1,0 +1,122 @@
+\documentclass[aps,twocolumn,longbibliography,nofootinbib]{revtex4-2}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage{lipsum}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{rotating}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{calligra}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=magenta,
+  citecolor=magenta,
+  urlcolor =magenta,
+  pdfborder={0 0 0}
+}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.8\baselineskip}{0pt}
+
+\renewcommand{\bibsection}{}
+
+\newcommand{\contactblock}{%
+  \onecolumngrid
+    \vspace{1em}
+    \begingroup\footnotesize\raggedright
+      $^{\ast}$\texttt{zach.ireland@mail.utoronto.ca}
+    \endgroup
+    \vspace{1em}
+  \twocolumngrid
+}
+
+\begin{document}
+
+\title{CTA200 Assignment \#3}
+
+\author{Zachary Ireland$^{1,\ast}$}
+
+\affiliation{$^{1}$Department of Physics, University of Toronto, Toronto, Ontario M5S 1A7, Canada}
+\affiliation{$^{1}$Canadian Institute for Theoretical Astrophysics, Toronto, Ontario M5S 1A7, Canada}
+
+\date{May 2026}
+
+\begin{abstract}
+\textbf{Introduction.} This assignment analyzes two examples of nonlinear dynamical behaviour: $(i)$ the Mandelbrot set is computed by fixing points $c$ in the complex plane, setting $z_0=0$, and iterating $z_{i+1}=z_i^2+c$ to classify each point as bounded or divergent; and $(ii)$ the Lorenz equations are numerically integrated to reproduce the aperiodic trajectories presented by \citet{Lorenz1963} and to demonstrate sensitivity to initial conditions. These two examples illustrate how deterministic systems can generate unpredictable long-term behaviour.
+\end{abstract}
+
+\maketitle
+
+\section{Question \#1}
+The Mandelbrot set was computed by choosing points $c=x+iy$ on the complex plane over the region $-2<x<2$ and $-2<y<2$, setting $z_0=0$, and iterating $z_{i+1}=z_i^2+c$. The region was sampled using a $1000\!\times\!1000$ grid, corresponding to $10^6$ complex points, with each point iterated at most 100 times. A point was classified as divergent once $|z| = \sqrt{\Re(z)^2 + \Im(z)^2}>2$. From this setup, two arrays are outputted: $(i)$ the Boolean array \texttt{bounded}, whose entries are \texttt{True} for points that do not diverge within 100 iterations and \texttt{False} for points that do, and $(ii)$ the integer array \texttt{divergence\_iter}, whose entries record the iteration number at which each point diverges, with entries left as 0 for points that do not diverge. Plotting \texttt{bounded} produces a two-colour image, with bounded points shown in yellow and divergent points shown in dark purple; see Figure \ref{fig: Question 1a}. Plotting \texttt{divergence\_iter} instead assigns each point a colour according to the iteration number at which it diverges (0 for points that do not diverge); see Figure \ref{fig: Question 1b}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.42\textwidth]{Figures/Question 1a.png}
+    \caption{Mandelbrot set computed on the complex plane for $-2 \leq \Re(c) \leq 2$ and $-2 \leq \Im(c) \leq 2$. All points are evolved under $z_{i+1}=z_i^2+c$ for up to 100 iterations: yellow points remain bounded, dark purple points diverge.}
+    \label{fig: Question 1a}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.47\textwidth]{Figures/Question 1b.png}
+    \caption{Mandelbrot set coloured by the iteration number at which each point diverges under $z_{i+1}=z_i^2+c$. Very dark regions ($=0$) correspond to points that remain bounded through 100 iterations, dark regions ($\gtrsim 0$) correspond to rapid divergence, and brighter regions ($> 0$) indicate slower divergence near the boundary of the set.}
+    \label{fig: Question 1b}
+\end{figure}
+
+\section{Question \#2}
+The Lorenz system consists of three coupled ordinary differential equations given by
+\begin{align}\label{eqn: Lorenz equations}
+    \dot{X} &= -\sigma(X-Y), \\
+    \dot{Y} &= rX-Y-XZ, \\
+    \dot{Z} &= -bZ+XY
+\end{align}
+where $\sigma=10$, $r=28$, and $b=8/3$ are the standard parameter values used by \citet{Lorenz1963}. Here, $\sigma$ is the dimensionless Prandtl number, representing the ratio of kinematic viscosity to thermal diffusivity; $r$ is the dimensionless Rayleigh number, which depends on the vertical temperature difference across the fluid layer; and $b$ is a dimensionless length scale. The state vector is $W=[X,\,Y,\,Z]$, with initial conditions $W_0=[X_0,\,Y_0,\,Z_0]=[0,\,1,\,0]$. The system in Equation \ref{eqn: Lorenz equations} was numerically integrated from $t=0$ to $t=60$ using \texttt{solve\_ivp} from \texttt{scipy.integrate} with time-step $\Delta t=0.01$. The iteration number is then given by $N=t/\Delta t$.
+
+Figure \ref{fig: Question 2a} reproduces Figure 1 of \citet{Lorenz1963}. Small differences from the original figure are expected, as the Lorenz system is chaotic: tiny numerical differences can grow rapidly during evolution. Although the same initial conditions and parameter values are used here, \citet{Lorenz1963} used a different numerical integration method, hence the trajectories need not agree point-by-point at later times. Figure \ref{fig: Question 2b} similarly reproduces Figure 2 of \citet{Lorenz1963}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/Question 2a.png}
+    \caption{Numerical solution of the Lorenz system showing $Y$ as a function of iteration number $N=t/\Delta t$ for the first 3000 iterations; appearance is aperiodic. Solution computed using $\sigma=10$, $r=28$, $b=8/3$, $W_0=[0, \, 1, \, 0]$, and $\Delta t=0.01$. Dashed red line marks $Y=0$.}
+    \label{fig: Question 2a}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\textwidth]{Figures/Question 2b.png}
+    \caption{Phase-space projections of the Lorenz trajectory for $14 \leq t \leq 19$, corresponding to $1400 \leq N \leq 1900$ for $\Delta t=0.01$. Upper panel shows $Y$-$Z$ projection; lower panel shows $Y$-$X$ projection. Labels mark the trajectory position at times $t=14, \, 15, \, \ldots, \, 19$.}
+    \label{fig: Question 2b}
+\end{figure}
+
+To test sensitivity to initial conditions, the Lorenz system was integrated again using the same parameter values $(\sigma,r,b)$ but with the perturbed initial conditions $\tilde{W}_0=[0,\,1.00000001,\,0]$; this differs from the original initial condition by $10^{-8}$ in the $Y_0$ component. The phase-space separation between the original trajectory $W(t)$ and the perturbed trajectory $\tilde{W}(t)$ at each time $t$ is
+\begin{equation}
+    d(t)=\sqrt{(\tilde{X}\!-\!X)^2+(\tilde{Y}\!-\!Y)^2+(\tilde{Z}\!-\!Z)^2}.
+\end{equation}
+Plotting $d(t)$ on a logarithmic scale against linear time $t$ gives Figure \ref{fig: Question 2c}. The approximately linear region on the semilog plot indicates approximately exponential growth of the initial perturbation, demonstrating sensitive dependence on initial conditions.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\textwidth]{Figures/Question 2c.png}
+    \caption{Semilog plot of the phase-space separation $d(t)$ between two Lorenz trajectories with initial conditions $W_0=[0,1,0]$ and $\tilde{W}_0=[0,1.00000001,0]$. The approximately linear growth on the semilog scale indicates exponential amplification of the initial perturbation.}
+    \label{fig: Question 2c}
+\end{figure}
+
+\section{Conclusion}
+The Mandelbrot calculation shows that repeated application of $z_{i+1}=z_i^2+c$ separates the complex plane into bounded and divergent regions with a highly structured, fractal boundary. This means that tiny changes in $c$ near the boundary can change whether the point remains bounded or diverges, hence deterministic iteration can yield high sensitivities to initial conditions. The Lorenz-system calculation shows that deterministic differential equations can produce aperiodic motion and unpredictable long-term behaviour. In particular, two trajectories initially separated by only $10^{-8}$ exhibit approximately exponential separation, providing numerical evidence of chaotic behaviour.
+
+\newpage
+\newpage
+\contactblock
+\clearpage
+\bibliography{references}
+
+\end{document}
